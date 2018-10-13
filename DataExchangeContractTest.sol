@@ -37,6 +37,16 @@ contract DataExchangeContractTest {
         emit addDataInfo(msg.sender,price,datahash,description);
     }
 
+    // 修改已有的数据信息
+    function modifyExistingDataInfo(uint index, uint price, string datahash, string description) public {
+        
+        require(index < DataOwners[msg.sender].length,"在这个位置上你的内容为空，你不能修改这个数据信息");
+        DataInfo datainfo = DataOwners[msg.sender][index];
+        datainfo.price = price;
+        datainfo.datahash = datahash;
+        datainfo.description = description;
+    }
+
     // 购买数据函数
     function Buy(address dataowneraddr, uint dataindex) public payable returns(string){
         
